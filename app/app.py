@@ -7,6 +7,7 @@ import webbrowser
 # https://bit.ly/btw-mserver
 
 MODS_FILE_PATH = os.path.join(os.path.expanduser("~"), "mods.txt")
+VERSION_FILE_PATH = "C://BTWLauncher/version.txt"
 
 def check_mods_content():
     if os.path.exists(MODS_FILE_PATH):
@@ -16,10 +17,10 @@ def check_mods_content():
                 button3.config(state=tk.DISABLED)
 
 def open_installer():
-    os.system('C:\\BTWLauncher\inst\installer.exe')
+    os.system('C:\\BTWLauncher\\inst\\installer.exe')
     
 def open_html_file():
-    file_path = "C:\\BTWLauncher\sites\main.html"
+    file_path = "C:\\BTWLauncher\\sites\\main.html"
     if os.path.exists(file_path):
         webbrowser.open("file://" + file_path)
     else:
@@ -41,9 +42,15 @@ def open_server_info():
     text_label = tk.Label(server_info_window, text=text, font=("Arial", 12), wraplength=380, justify="center")
     text_label.pack(pady=10)
 
+def get_version():
+    if os.path.exists(VERSION_FILE_PATH):
+        with open(VERSION_FILE_PATH, "r") as version_file:
+            return version_file.read().strip()
+    return "Версия не найдена"
+
 window = tk.Tk()
 window.title("Биг Тейсти Ворлд")
-window.geometry("609x349")  
+window.geometry("609x369")  
 print('Не обращайте внимание на консоль, если ничего плохого не происходит.')
 print('Если программа не работает и/или сломалась, обращайтесь сюда:')
 print('https://t.me/kobicom https://bit.ly/btw-mserver')
@@ -58,7 +65,6 @@ text = """Добро пожаловать в недо-лаунчер Биг Те
 Тут расположена вся нужная информация, которая может тебе понадобится!"""
 text_label = tk.Label(content_frame, text=text, font=("Arial", 14), wraplength=550, justify="center")
 text_label.pack(pady=20)
-
 
 def open_discord():
     webbrowser.open("https://bit.ly/btw-mserver")
@@ -76,9 +82,11 @@ button2.pack(side=tk.LEFT, padx=10)
 button3 = tk.Button(button_frame, text="Установить моды", command=open_installer, font=("Arial", 14))
 button3.pack(side=tk.LEFT, padx=10)  
 
-
 server_button = tk.Button(window, text="Айпи сервера", command=open_server_info, font=("Arial", 14))
-server_button.place(relx=0.49, rely=0.8, anchor=tk.CENTER)
+server_button.place(relx=0.79, rely=0.75, anchor=tk.CENTER)
+
+version_label = tk.Label(window, text="Версия: " + get_version(), font=("Arial", 12))
+version_label.place(x=15, y=352, anchor=tk.SW)
 
 window.resizable(False, False)
 
