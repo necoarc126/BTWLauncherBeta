@@ -13,7 +13,7 @@ def update_and_launch():
     try:
         with zipfile.ZipFile(archive_path, 'r') as zip_ref:
             zip_ref.extractall(output_folder)
-        show_message("Обновление завершено", "Обновление завершено!")
+        show_message("Обновление", "Обновление завершено!")
         subprocess.Popen([r"C:\BTWLauncher\app\app.exe"], shell=True)
     except Exception as e:
         show_message("Ошибка", f"Произошла ошибка: {str(e)}")
